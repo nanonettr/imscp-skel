@@ -4,8 +4,11 @@
 <IfModule rewrite_module>
     RewriteEngine on
 
-    # Disable access to hidden files and dirs
-    RewriteRule (^\.|/\.) - [F]
+    # Disable access to backup files that accidentally uploaded
+    RewriteRule \..*~$ - [F,L]
+
+    # Disable access to hidden files and folders
+    RewriteRule (^\.|/\.) - [F,L]
 
 #    RewriteCond $1 !^(index\.php|robots\.txt|favicon\.ico|apple-touch-icon\.png)
 #    RewriteCond %{REQUEST_FILENAME} !-f
