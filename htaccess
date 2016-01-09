@@ -1,18 +1,21 @@
 # https://httpd.apache.org/docs/2.4/howto/htaccess.html
-# https://help.ubuntu.com/community/EnablingUseOfApacheHtaccessFiles
 
+# http://httpd.apache.org/docs/2.4/en/rewrite/flags.html
 <IfModule rewrite_module>
     RewriteEngine on
 
     # Disable access to backup files that accidentally uploaded
-    RewriteRule \..*~$ - [F,L]
+    RewriteRule .*~$ - [F,L]
 
-    # Disable access to hidden files and folders
+    # Disable access to hidden files/folders
     RewriteRule (^\.|/\.) - [F,L]
 
-#    RewriteCond $1 !^(index\.php|robots\.txt|favicon\.ico|apple-touch-icon\.png)
+    # Rewrite all to index.php/
 #    RewriteCond %{REQUEST_FILENAME} !-f
 #    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_FILENAME} !-l
+#    RewriteCond %{REQUEST_FILENAME} !\.(css|js|ico|jpe?g|png|gif|swf|flv|pdf|mp3|mp4|m4a|m4v|wave?|ogv|ogg|webm|webp|eot|otf|woff2?|ttf|svg)$
+#    RewriteCond %{REQUEST_FILENAME} !^(index\.php|robots\.txt|favicon\.ico|apple-touch-icon\.png)
 #    RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]
 </IfModule>
 
